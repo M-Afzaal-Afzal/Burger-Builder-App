@@ -10,7 +10,7 @@ function Toolbar() {
             <div className={classes.Logo}>
                 <Logo/>
             </div>
-            <nav>
+            <nav className={classes.desktopOnly}>
                 <NavigationItems/>
             </nav>
         </div>

@@ -1,5 +1,6 @@
 .navigationItems {
     list-style: none;
+    flex-direction: column;
     margin: 0;
     padding: 0;
     display: flex;
@@ -8,8 +9,8 @@
     height: 100%;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (min-width: 500px) {
     .navigationItems {
-        flex-direction: column;
+        flex-flow: row;
     }
 }

@@ -29,6 +29,7 @@
 
 .Logo {
     height: 11%;
-    display: flex;
-    justify-content: center;
+    margin-bottom: 32px;
+    /*display: flex;*/
+    /*justify-content: center;*/
 }
