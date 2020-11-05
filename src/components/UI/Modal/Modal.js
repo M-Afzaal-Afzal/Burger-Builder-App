@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 
 import classes from './Modal.module.css';
-import Auxiliary from '../../../hoc/Auxiliary';
+import Auxiliary from '../../../hoc/Auxiliary/Auxiliary';
 import Backdrop from '../Backdrop/Backdrop';
 
 class Modal extends Component {
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return nextProps.show !== this.props.show;
+        return nextProps.show !== this.props.show || this.props.children !== nextProps.children;
     }
 
-    componentWillUpdate(nextProps, nextState, nextContext) {
-        console.log('running');
-    }
+    // componentWillUpdate(nextProps, nextState, nextContext) {
+    //     console.log('running');
+    // }
 
     render() {
         return(
