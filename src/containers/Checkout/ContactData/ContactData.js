@@ -149,11 +149,11 @@ class ContactData extends Component {
             }
 
             if (rules.maxLength && isValid) {
-                isValid = value.length <= rules.maxLength;
+                isValid = value.trim().length <= rules.maxLength;
             }
 
             if (rules.minLength && isValid) {
-                isValid = value.length >= rules.minLength;
+                isValid = value.trim().length >= rules.minLength;
             }
 
         return isValid;
