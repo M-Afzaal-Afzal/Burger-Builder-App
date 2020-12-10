@@ -1,35 +1,40 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
+import {connect} from "react-redux";
 
 import Auxiliary from '../Auxiliary/Auxiliary';
 import classes from './Layout.module.css';
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 
-class layout extends Component {
+const Layout = (props) => {
 
-    state = {
-        show: false
-    }
+    const [state,setState] = useState({show: false});
 
-    showHandler = () => {
-        this.setState((prevState) => {
+    const showHandler = () => {
+        setState((prevState) => {
             return {
                 show: !prevState.show
             }
         })
     }
 
-    render() {
-        return (
-            <Auxiliary>
-                <Toolbar clicked={this.showHandler} show={this.state.show}/>
-                <SideDrawer show={this.state.show} clicked={this.showHandler}/>
-                <main className={classes.Content}>
-                    {this.props.children}
-                </main>
-            </Auxiliary>
-        )
+
+    return (
+        <Auxiliary>
+            <Toolbar isAuthenticated={props.isAuth} clicked={showHandler} show={state.show}/>
+            <SideDrawer isAuthenticated={props.isAuth} show={state.show} clicked={showHandler}/>
+            <main className={classes.Content}>
+                {props.children}
+            </main>
+        </Auxiliary>
+    )
+
+}
+
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.auth.token !== null,
     }
 }
 
-export default layout;
+export default connect(mapStateToProps, null)(Layout);
