@@ -1,4 +1,3 @@
-import React, {Component} from 'react';
 import CheckoutSummary from "../../components/order/CheckoutSummary/CheckoutSummary";
 import {Route, Redirect} from 'react-router-dom'
 import ContactData from "./ContactData/ContactData";

@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 
-export default (httpClient) => {
+const useHttpClient =  (httpClient) => {
     const [error, setError] = useState(null);
 
 
@@ -26,3 +26,5 @@ export default (httpClient) => {
 
     return [error, errorConfirmedHandler];
 }
+
+export default useHttpClient;

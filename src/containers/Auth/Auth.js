@@ -7,8 +7,7 @@ import {connect} from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import {Redirect} from 'react-router-dom';
 import {checkValidity} from "../../shared/utility";
-import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
-import axios from "axios";
+
 
 const Auth = (props) => {
 
@@ -49,11 +48,13 @@ const Auth = (props) => {
 
     // debugger;
 
+    const {buildingBurger,authRedirectPath,onSetAuthRedirectPath} = props;
+
     useEffect(() => {
-        if (!props.buildingBurger && props.authRedirectPath !== '/') {
-            props.onSetAuthRedirectPath();
+        if (!buildingBurger && authRedirectPath !== '/') {
+            onSetAuthRedirectPath();
         }
-    },[])
+    },[buildingBurger,authRedirectPath,onSetAuthRedirectPath])
 
     // componentDidMount()
     // {

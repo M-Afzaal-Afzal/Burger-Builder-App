@@ -21,27 +21,29 @@ const BurgerBuilder = (props) => {
     //     purchasing: false,
     // }
 
-    const [state,setState] = useState({
+    const [state, setState] = useState({
         purchasing: false
     })
 
-    useEffect(()=> {
-        props.onInitIngredients();
+    const {onInitIngredients} = props;
 
-    },[])
+    useEffect(() => {
+        onInitIngredients();
+
+    }, [onInitIngredients])
 
     // componentDidMount() {
     //     this.props.onInitIngredients();
-        // axios.get('https://burgerbuilder-c8cc2.firebaseio.com/ingredients.json')
-        //     .then(response => {
-        //         this.setState({ingredients: response.data})
-        //         return response;
-        //     }).catch(error => {
-        //     this.setState({
-        //         error: true
-        //     })
-        //
-        // })
+    // axios.get('https://burgerbuilder-c8cc2.firebaseio.com/ingredients.json')
+    //     .then(response => {
+    //         this.setState({ingredients: response.data})
+    //         return response;
+    //     }).catch(error => {
+    //     this.setState({
+    //         error: true
+    //     })
+    //
+    // })
     // }
 
     const updatePurchaseState = (ingredients) => {
@@ -96,7 +98,7 @@ const BurgerBuilder = (props) => {
 
     }
 
-   const purchaseCancelHandler = () => {
+    const purchaseCancelHandler = () => {
         setState({purchasing: false});
     }
 
@@ -122,51 +124,52 @@ const BurgerBuilder = (props) => {
     }
 
 
-        const disabledInfo = {
-            ...props.ings
-        };
-        for (let key in disabledInfo) {
-            if (disabledInfo.hasOwnProperty(key)) {
-                disabledInfo[key] = disabledInfo[key] <= 0
-            }
+    const disabledInfo = {
+        ...props.ings
+    };
+    for (let key in disabledInfo) {
+        if (disabledInfo.hasOwnProperty(key)) {
+            disabledInfo[key] = disabledInfo[key] <= 0
         }
+    }
 
-        let burger = props.error ? <p>Ingredients can't be loaded</p> : <Spinner/>;
-        let orderSummary = null;
+    let burger = props.error ? <p>Ingredients can't be loaded</p> : <Spinner/>;
+    let orderSummary = null;
 
-        if (props.ings) {
-            burger = (<Auxiliary>
-                    <Burger ingredients={props.ings}/>
-                    <BuildControls
-                        ingredientAdded={props.onIngredientAdded}
-                        ingredientRemoved={props.onIngredientRemoved}
-                        disabled={disabledInfo}
-                        purchasable={updatePurchaseState(props.ings)}
-                        ordered={purchaseHandler}
-                        isAuth={props.isAuthenticated}
-                        price={props.price}/>
-                </Auxiliary>
-            )
-
-            orderSummary = (<OrderSummary
-                ingredients={props.ings}
-                purchaseCancelled={purchaseCancelHandler}
-                purchaseContinued={purchaseContinueHandler}/>);
-        }
-
-        // if (this.state.loading) {
-        //     orderSummary = (<Spinner/>)
-        // }
-
-        // {salad: true, meat: false, ...}
-        return (
-            <Auxiliary>
-                <Modal show={state.purchasing} modalClosed={purchaseCancelHandler}>
-                    {orderSummary}
-                </Modal>
-                {burger}
+    if (props.ings) {
+        burger = (<Auxiliary>
+                <Burger ingredients={props.ings}/>
+                <BuildControls
+                    ingredientAdded={props.onIngredientAdded}
+                    ingredientRemoved={props.onIngredientRemoved}
+                    disabled={disabledInfo}
+                    purchasable={updatePurchaseState(props.ings)}
+                    ordered={purchaseHandler}
+                    isAuth={props.isAuthenticated}
+                    price={props.price}/>
+                    <p style={{fontSize: '1rem',textTransform: 'uppercase',textAlign: 'center', color: '#CF8F2E'}}>Developed by  <span style={{color: 'green'}}>M Afzaal Afzal</span> with love in punjab pakistan</p>
             </Auxiliary>
-        );
+        )
+
+        orderSummary = (<OrderSummary
+            ingredients={props.ings}
+            purchaseCancelled={purchaseCancelHandler}
+            purchaseContinued={purchaseContinueHandler}/>);
+    }
+
+    // if (this.state.loading) {
+    //     orderSummary = (<Spinner/>)
+    // }
+
+    // {salad: true, meat: false, ...}
+    return (
+        <Auxiliary>
+            <Modal show={state.purchasing} modalClosed={purchaseCancelHandler}>
+                {orderSummary}
+            </Modal>
+            {burger}
+        </Auxiliary>
+    );
 
 }
 
